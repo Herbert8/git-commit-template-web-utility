@@ -6,86 +6,111 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <style>
+        hr {
+            border: none;
+            border-top: 3px double #333;
+            color: #333;
+            overflow: visible;
+            text-align: center;
+            height: 5px;
+        }
+
+        hr:after {
+            background: #fff;
+            content: '§';
+            content: '非常用选项';
+            padding: 0 4px;
+            position: relative;
+            top: -13px;
+        }
+    </style>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
 
-    <title>Git Commit Template</title>
+    <title>Git Commit Template - Web Utility</title>
 </head>
 
 <body>
     <div id="app" class="container-xxl pt-5">
         <div class="row justify-content-start">
-            <div class="col-6">
+            <div class="col-7">
                 <fieldset class="row mb-3">
                     <legend class="col-form-label pt-0">变更类型（必填）</legend>
                     <div class="col-sm-10">
                         <div class="form-check">
                             <input class="form-check-input" type="radio" id="feat" name="changeType" value="feat"
                                 v-model="changeType">
-                            <label class="form-check-label" for="feat">feat - 新功能</label>
+                            <label class="form-check-label" for="feat">feat - ✨ Features: 新功能</label>
                         </div>
 
                         <div class="form-check">
                             <input class="form-check-input" type="radio" id="fix" name="changeType" value="fix"
                                 v-model="changeType">
-                            <label class="form-check-label" for="fix">fix - 修复缺陷</label>
+                            <label class="form-check-label" for="fix">fix - 🐛 Bug Fixes: 修复缺陷</label>
                         </div>
 
                         <div class="form-check">
                             <input class="form-check-input" type="radio" id="docs" name="changeType" value="docs"
                                 v-model="changeType">
-                            <label class="form-check-label" for="docs">docs - 仅文档更改</label>
+                            <label class="form-check-label" for="docs">docs - 📚 Documentation: 仅文档更改</label>
                         </div>
 
                         <div class="form-check">
                             <input class="form-check-input" type="radio" id="style" name="changeType" value="style"
                                 v-model="changeType">
-                            <label class="form-check-label" for="style">style - 代码格式：不影响代码含义的更改（空格、格式、缺少分号等）</label>
+                            <label class="form-check-label" for="style">style - 💎 Styles:
+                                代码格式：不影响代码含义的更改（空格、格式、缺少分号等）</label>
                         </div>
 
                         <div class="form-check">
                             <input class="form-check-input" type="radio" id="refactor" name="changeType"
                                 value="refactor" v-model="changeType">
-                            <label class="form-check-label" for="refactor">refactor - 代码重构：既不修复错误也不添加功能的代码更改</label>
+                            <label class="form-check-label" for="refactor">refactor - 📦 Code Refactoring:
+                                代码重构：既不修复错误也不添加功能的代码更改</label>
                         </div>
 
                         <div class="form-check">
                             <input class="form-check-input" type="radio" id="perf" name="changeType" value="perf"
                                 v-model="changeType">
-                            <label class="form-check-label" for="louie">perf - 性能优化</label>
+                            <label class="form-check-label" for="louie">perf - 🚀 Performance Improvements: 性能优化</label>
                         </div>
 
                         <div class="form-check">
                             <input class="form-check-input" type="radio" id="test" name="changeType" value="test"
                                 v-model="changeType">
-                            <label class="form-check-label" for="test">test - 修改测试代码</label>
+                            <label class="form-check-label" for="test">test - 🚨 Tests: 修改测试代码</label>
                         </div>
 
                         <div class="form-check">
                             <input class="form-check-input" type="radio" id="build" name="changeType" value="build"
                                 v-model="changeType">
                             <label class="form-check-label" for="build">build -
-                                影响构建系统或外部依赖项的更改</label>
+                                🛠 Builds: 影响构建系统或外部依赖项的更改</label>
                         </div>
 
                         <div class="form-check">
                             <input class="form-check-input" type="radio" id="ci" name="changeType" value="ci"
                                 v-model="changeType">
-                            <label class="form-check-label" for="ci">ci - CI
+                            <label class="form-check-label" for="ci">ci - ⚙️ Continuous Integrations: CI
                                 配置、脚本文件等更新</label>
                         </div>
 
                         <div class="form-check">
                             <input class="form-check-input" type="radio" id="chore" name="changeType" value="chore"
                                 v-model="changeType">
-                            <label class="form-check-label" for="chore">chore - 非 src 或 test 的更新</label>
+                            <label class="form-check-label" for="chore">chore - ♻️ Chores: 非 src 或 test 的更新</label>
                         </div>
 
                         <div class="form-check">
                             <input class="form-check-input" type="radio" id="revert" name="changeType" value="revert"
                                 v-model="changeType">
-                            <label class="form-check-label" for="revert">revert - 撤回之前的提交</label>
+                            <label class="form-check-label" for="revert">revert - 🗑 Reverts: 撤回之前的提交</label>
                         </div>
                     </div>
                 </fieldset>
@@ -125,13 +150,38 @@
             </div>
 
 
-            <div class="col-6">
+            <div class="col-5">
                 <label for="preview">提交信息预览</label>
 
                 <pre id="preview" style="background-color: bisque;">
 {{ commitMessage }}
 </pre>
                 <button class="btn btn-primary mb-3" @click="copyToClipboard">复制到剪贴板</button>
+
+                <div>
+                    <br><br>
+                    参考链接：<br>
+                    <ul>
+                        <li><a href="https://confluence.mochasoft.com.cn/confluence/pages/viewpage.action?pageId=2130084"
+                                target="_blank" class="link-primary">Git/GitLab/GitFlow 的使用规范 - Confluence</a></li>
+
+                        <li><a href="https://confluence.mochasoft.com.cn/confluence/pages/viewpage.action?pageId=6950864"
+                                target="_blank" class="link-primary">Git 规范 - Confluence</a></li>
+
+                        <li><a href="https://confluence.mochasoft.com.cn/confluence/pages/viewpage.action?pageId=38446708"
+                                target="_blank" class="link-primary">Git Commit Log 提交规范 - Confluence</a></li>
+
+                        <li><a href="https://www.conventionalcommits.org/zh-hans" target="_blank"
+                                class="link-primary">约定式提交 - Conventional Commits</a></li>
+
+                        <li><a href="https://github.com/pvdlg/conventional-changelog-metahub#commit-types"
+                                target="_blank" class="link-primary">提交类型说明 - Commit Types</a></li>
+
+                        <li><a href="https://www.bilibili.com/video/BV1NU4y1U7KT/?spm_id_from=333.788&vd_source=439f78490c92640c9c22896175ff1562"
+                                target="_blank" class="link-primary">你真的会写 Git 提交信息吗？ - bilibili.com</a></li>
+                    </ul>
+                </div>
+
             </div>
 
         </div>
