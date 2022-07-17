@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+
+    <title>Git Commit Template</title>
+</head>
+
+<body>
+    <div id="app" class="container-xxl pt-5">
+        <div class="row justify-content-start">
+            <div class="col-6">
+                <fieldset class="row mb-3">
+                    <legend class="col-form-label pt-0">变更类型（必填）</legend>
+                    <div class="col-sm-10">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="feat" name="changeType" value="feat"
+                                v-model="changeType">
+                            <label class="form-check-label" for="feat">feat - 新功能</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="fix" name="changeType" value="fix"
+                                v-model="changeType">
+                            <label class="form-check-label" for="fix">fix - 修复缺陷</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="docs" name="changeType" value="docs"
+                                v-model="changeType">
+                            <label class="form-check-label" for="docs">docs - 仅文档更改</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="style" name="changeType" value="style"
+                                v-model="changeType">
+                            <label class="form-check-label" for="style">style - 代码格式：不影响代码含义的更改（空格、格式、缺少分号等）</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="refactor" name="changeType"
+                                value="refactor" v-model="changeType">
+                            <label class="form-check-label" for="refactor">refactor - 代码重构：既不修复错误也不添加功能的代码更改</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="perf" name="changeType" value="perf"
+                                v-model="changeType">
+                            <label class="form-check-label" for="louie">perf - 性能优化</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="test" name="changeType" value="test"
+                                v-model="changeType">
+                            <label class="form-check-label" for="test">test - 修改测试代码</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="build" name="changeType" value="build"
+                                v-model="changeType">
+                            <label class="form-check-label" for="build">build -
+                                影响构建系统或外部依赖项的更改</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="ci" name="changeType" value="ci"
+                                v-model="changeType">
+                            <label class="form-check-label" for="ci">ci - CI
+                                配置、脚本文件等更新</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="chore" name="changeType" value="chore"
+                                v-model="changeType">
+                            <label class="form-check-label" for="chore">chore - 非 src 或 test 的更新</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="revert" name="changeType" value="revert"
+                                v-model="changeType">
+                            <label class="form-check-label" for="revert">revert - 撤回之前的提交</label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="mb-3">
+                    <label for="shortDesc" class="form-label">简要描述（必填）：</label>
+                    <input id="shortDesc" type="text" class="form-control" v-model="shortDesc">
+                </div>
+
+                <div class="mb-3">
+                    <label for="jiraIssueID" class="form-label">JIRA Issue ID（必填）：</label>
+                    <input id="jiraIssueID" type="text" class="form-control" placeholder="#NONE-0"
+                        v-model="jiraIssueID">
+                </div>
+
+                <div class="mb-3">
+                    <label for="longDesc" class="form-label">详细描述（可选）：</label>
+                    <textarea id="longDesc" class="form-control" v-model="longDesc"></textarea>
+                </div>
+
+                <hr>
+
+                <div class="mb-3">
+                    <label for="changeScope" class="form-label">影响范围（可选）：</label>
+                    <input id="changeScope" type="text" class="form-control" v-model="changeScope">
+                </div>
+
+                <div class="mb-3">
+                    <label for="breakingChanges" class="form-label">不兼容的变更（可选）：</label>
+                    <textarea id="breakingChanges" class="form-control" v-model="breakingChanges"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="closedIssues" class="form-label">关闭的问题（可选）：</label>
+                    <input id="closedIssues" class="form-control" type="text" v-model="closedIssues">
+                </div>
+            </div>
+
+
+            <div class="col-6">
+                <label for="preview">提交信息预览</label>
+
+                <pre id="preview" style="background-color: bisque;">
+{{ commitMessage }}
+</pre>
+                <button class="btn btn-primary mb-3" @click="copyToClipboard">复制到剪贴板</button>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</body>
+
+<script src="js/main.js"></script>
+
+</html>
