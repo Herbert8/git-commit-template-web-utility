@@ -1,7 +1,7 @@
 (function () {
 
     var dataObj = {
-        changeType: '',
+        changeType: 'feat',
         changeScope: '',
         shortDesc: '',
         jiraIssueID: '',
@@ -47,7 +47,7 @@
                 return this.jiraIssueID.trim() === '' ? '#NONE-0' : this.jiraIssueID;
             },
             commitMessage() {
-                var commitMsg = `[${this.changeType}${this.changeScopeDisplay}] ${this.shortDesc} ${this.jiraIssueIDDisplay}
+                var commitMsg = `${this.changeType}${this.changeScopeDisplay}: ${this.shortDesc} ${this.jiraIssueIDDisplay}
 
 ${this.longDesc}
 
